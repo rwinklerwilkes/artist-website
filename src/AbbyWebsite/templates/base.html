@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load static %}
+<html>
+    <head>
+    
+        <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        
+        <script type="text/javascript" src = "{% static 'jquery/base.js' %}"></script>
+        <title>{%block title%}{%endblock%}</title>
+    </head>
+    <body>
+        <div id="sidebar">
+            <nav>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="{% url 'artwork:art_view' artcontext='ge_md' %}">Giant Eagle Market District</a></li>
+                <li role="presentation"><a href="{% url 'artwork:art_view' artcontext='personal' %}">Personal Projects</a></li>
+            </ul>
+            </nav>
+        </div>
+        <div id="header-wrapper">
+            <h1>
+            {% block header %}
+            {% endblock %}
+            </h1>
+        </div>
+        <div id="content-wrapper" class="container">
+            
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

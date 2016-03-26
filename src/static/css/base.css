@@ -1,0 +1,52 @@
+* {
+    border-style: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+#sidebar {
+    z-index: 1000;
+    position: fixed;
+    top: 200px;
+    height: 100%;
+    background-color: #FFF;
+    width: 250px;
+    left: 250px;
+    margin-left: -250px;
+    overflow-y: auto;
+}
+
+#sidebar a {
+    color: #000;
+}
+
+
+#content-wrapper {
+    position: absolute;
+    padding-left: 250px;
+    width: 100%;
+    top: 100px;
+}
+
+#header-wrapper {
+    position: absolute;
+    height: 100px;
+    left: 250px;
+    margin: 0;
+}
+
+.img-container {
+    position: absolute;
+    width: 200px;
+    margin: 10px;
+}
+
+.img-container img {
+    display: block;
+    width: 210px;
+    height: 210px;
+}
+
+.img-container button {
+    padding: 10px;
+    border: none;
+}

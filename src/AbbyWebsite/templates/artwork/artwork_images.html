@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for art in artwork %}
+<div class="img-container">
+    <img src=" {{ art.get_image }} "/>
+    <div class="row">
+        <div class="col-xs-6 col-s-6 col-md-6">
+            <button id="{{art.id}}" class="btn btn-default like-button">
+            {% csrf_token %}
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
+            </button>
+        </div>
+        <div class="col-xs-6 col-s-6 col-md-6">
+        <button class="btn btn-default">
+        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment
+        </button>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
