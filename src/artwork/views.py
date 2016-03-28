@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .models import Artwork, ArtworkContext
 from comments.forms import CommentForm
+from pip._vendor import requests
+from .forms import ArtworkImageForm
+from .utils import handle_uploaded_image
 
 # Create your views here.
 def art_view(request,artcontext):
@@ -26,6 +29,19 @@ def art_view(request,artcontext):
             comment_forms[art.id] = CommentForm(initial={'artwork':art.id})
         
     return render(request,'artwork/'+artcontext+'.html',{'artwork':all_art,'comment_forms':comment_forms})
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = ArtworkImageForm(request.POST,request.FILES)
+        if form.is_valid():
+            artwork = form.save(commit=False)
+            t = handle_uploaded_image(request.FILES['image'])
+            #filename,image
+            artwork.image.save(t[0],t[1])
+            artwork.save()
+    else:
+        form = ArtworkImageForm()
+    return render(request, 'artwork/upload.html', {'form': form})
 
 #------------------------------------------------- def market_district(request):
     #--------- artwork_context = ArtworkContext.objects.get(created_for='ge_md')

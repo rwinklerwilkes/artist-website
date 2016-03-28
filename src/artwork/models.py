@@ -1,5 +1,7 @@
 from django.db import models
 from sorl.thumbnail import ImageField
+from PIL import Image
+from io import BytesIO
 
 class ArtworkContext(models.Model):
     created_for = models.SlugField(unique=True,primary_key=True)
@@ -23,3 +25,4 @@ class Artwork(models.Model):
         
     def __str__(self):
         return self.name
+        

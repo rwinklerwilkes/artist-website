@@ -30,7 +30,13 @@
 #bigimage-wrapper {
     position: absolute;
     width: 50%;
+    left:50%;
     top: 100px;
+}
+
+#bigimage-wrapper img {
+    position: relative;
+    width: 75%;
 }
 
 #header-wrapper {
@@ -41,7 +47,8 @@
 }
 
 .img-container {
-    position: absolute;
+    position: relative;
+    display: inline-block;
     width: 200px;
     margin: 10px;
 }

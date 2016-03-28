@@ -16,7 +16,6 @@ class Comment(models.Model):
         DATE_FORMAT = "%Y-%m-%d"
         TIME_FORMAT = "%I:%M"
         retval = self.posted_at.strftime("%s %s" % (DATE_FORMAT, TIME_FORMAT))
-        print(retval)
         return retval
     
 class Like(models.Model):

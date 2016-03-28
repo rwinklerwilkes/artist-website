@@ -14,6 +14,17 @@ function getCookie(name) {
     return cookieValue;
 }
 
+function loadBigImage(url) {
+    $('#bigimage-wrapper').html('<img src="'+url+'">');
+}
+
+$(document).ready(function () {
+    $('img.thmbnl').click(function() {
+        var clicked_url = $(this).parent().find('img.modal-image').attr("src");
+        loadBigImage(clicked_url);
+    });
+});
+
 var csrftoken = getCookie('csrftoken');
 
 function csrfSafeMethod(method) {

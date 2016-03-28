@@ -6,8 +6,8 @@
 {% block content %}
 {% for art in artwork %}
 <div class="img-container">
-    {% thumbnail art.image "100x100" crop="center" as im %}
-        <img src="{{ im.url }}"/>
+    {% thumbnail art.image "200x200" crop="center" as im %}
+        <img class='thmbnl' src="{{ im.url }}"/>
     {% empty %}
         <p>No image</p>
     {% endthumbnail %}
