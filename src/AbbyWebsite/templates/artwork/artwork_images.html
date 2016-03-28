@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 
+{% load comment_extras %}
+{% load thumbnail %}
+
 {% block content %}
 {% for art in artwork %}
 <div class="img-container">
-    <img src=" {{ art.get_image }} "/>
+    {% thumbnail art.image "100x100" crop="center" as im %}
+        <img src="{{ im.url }}"/>
+    {% empty %}
+        <p>No image</p>
+    {% endthumbnail %}
     <div class="row">
         <div class="col-xs-6 col-s-6 col-md-6">
             <button id="{{art.id}}" class="btn btn-default like-button">
@@ -12,9 +19,42 @@
             </button>
         </div>
         <div class="col-xs-6 col-s-6 col-md-6">
-        <button class="btn btn-default">
+        <button id="comment{{art.id}}" class="btn btn-default comment-button">
         <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment
         </button>
+        </div>
+    </div>
+    <div class="modal fade" id="commentModal{{art.id}}" tabindex="-1" role="dialog" aria-labelledby="commentTitle">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="commentTitle">Comment</h4>
+                </div>
+                <div class="modal-body">
+                    <img class="modal-image" src="{{ art.image.url }}"/>
+                    <div class="panel panel-default comments-panel">
+                        <div class="panel-body comments">
+                        </div>
+                    </div>
+                    <form id="comment_form{{art.id}}" method="post" action="" enctype = "multipart/form-data">
+                        {% csrf_token %}
+                        <p class='comment-form'>
+                        {% for field in comment_forms|get_item:art.id %}
+                            {% if not field.is_hidden %}
+                                {{ field.errors }}{{ field.label_tag }} {{ field }}
+                            {% else %}
+                                {{ field.as_hidden }}
+                            {% endif %}
+                        {% endfor %}
+                        </p>
+                        <input type="submit" name="submit" value="Submit New Comment" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

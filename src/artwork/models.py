@@ -1,4 +1,5 @@
 from django.db import models
+from sorl.thumbnail import ImageField
 
 class ArtworkContext(models.Model):
     created_for = models.SlugField(unique=True,primary_key=True)
@@ -12,7 +13,7 @@ class Artwork(models.Model):
     name=models.CharField(max_length=100)
     description=models.CharField(max_length=200)
     created_on = models.DateField(blank=True,null=True)
-    image = models.ImageField(upload_to='artwork/',blank=True,null=True)
+    image = ImageField(upload_to='artwork/',blank=True,null=True)
     
     def get_image(self):
         if self.image is not None:

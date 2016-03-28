@@ -23,7 +23,13 @@
 #content-wrapper {
     position: absolute;
     padding-left: 250px;
-    width: 100%;
+    width: 50%;
+    top: 100px;
+}
+
+#bigimage-wrapper {
+    position: absolute;
+    width: 50%;
     top: 100px;
 }
 
@@ -42,11 +48,30 @@
 
 .img-container img {
     display: block;
-    width: 210px;
-    height: 210px;
 }
 
 .img-container button {
     padding: 10px;
     border: none;
+}
+
+.modal-image {
+    display: inline-block;
+    position: relative;
+    max-height:600px;
+    width: 80%;
+    left: 10%;
+}
+
+.comments-panel {
+    position: relative;
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.posted-info {
+    font-size: 10px;
+    color: #808080;
+    padding: 1px;
+    margin: 0px;
 }
