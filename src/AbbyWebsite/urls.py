@@ -17,8 +17,10 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from artwork.views import main
 
 urlpatterns = [
+    url(r'^$',main),
     url(r'^admin/', admin.site.urls),
     url(r'^artwork/',include('artwork.urls',namespace='artwork')),
     url(r'^comments/',include('comments.urls',namespace='comments'))

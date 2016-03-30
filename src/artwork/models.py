@@ -15,6 +15,9 @@ class Artwork(models.Model):
     name=models.CharField(max_length=100)
     description=models.CharField(max_length=200)
     created_on = models.DateField(blank=True,null=True)
+    medium = models.CharField(max_length=100,blank=True,null=True)
+    width = models.IntegerField(blank=True,null=True)
+    height = models.IntegerField(blank=True,null=True)
     image = ImageField(upload_to='artwork/',blank=True,null=True)
     
     def get_image(self):

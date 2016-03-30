@@ -13,12 +13,18 @@
     left: 250px;
     margin-left: -250px;
     overflow-y: auto;
+    text-align: right;
+    padding-right: 20px;
 }
 
 #sidebar a {
     color: #000;
 }
 
+#sidebar li {
+    float: right;
+    padding-right: 0px;
+}
 
 #content-wrapper {
     position: absolute;

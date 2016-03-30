@@ -14,14 +14,46 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function loadBigImage(url) {
+function loadBigImage(url,art_id) {
     $('#bigimage-wrapper').html('<img src="'+url+'">');
+    $.ajax({
+            type:'GET',
+            url:'/artwork/art_info/',
+            data:{'artwork_id':art_id},
+            success: function(dataFromServer) {
+                var start_html = $('#bigimage-wrapper').html();
+                //Add name
+                start_html += '<p><i>' + dataFromServer.name + '</i>, ';
+                //Add medium
+                start_html += dataFromServer.medium + ', ';
+                //Add width x height
+                start_html += dataFromServer.width + ' x ' + dataFromServer.height + ', ';
+                //Add date            
+                start_html += dataFromServer.created_on + '</p>';
+                $('#bigimage-wrapper').html(start_html);
+            }
+        });
 }
+
+function trimID(modalImageID) {
+    var chars_needed = modalImageID.length-11;
+    return modalImageID.substr(modalImageID.length-chars_needed);
+}
+
+$(document).ready(function () {
+    var images = $('.modal-image');
+    var img_to_display = images[Math.floor(Math.random() * images.length)]; 
+    var url = $(img_to_display).attr("src");
+    //img class is modal-image (11 chars)
+    var id = trimID($(img_to_display).attr("id"));
+    loadBigImage(url,id);
+});
 
 $(document).ready(function () {
     $('img.thmbnl').click(function() {
         var clicked_url = $(this).parent().find('img.modal-image').attr("src");
-        loadBigImage(clicked_url);
+        var id = trimID($(this).parent().find('img.modal-image').attr("id"));
+        loadBigImage(clicked_url,id);
     });
 });
 
